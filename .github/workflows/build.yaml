@@ -60,7 +60,7 @@ jobs:
   build:
     needs: setup
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         include:
           - { name: noble,  rel: 24.04             }
@@ -75,7 +75,7 @@ jobs:
     needs: setup
     if: ${{ inputs.arm_targets != '{"target":[""]}' }}
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         include:
           - { name: noble,  rel: 24.04,  cpu: arm }
