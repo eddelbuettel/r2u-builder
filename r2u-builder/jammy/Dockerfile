@@ -17,7 +17,8 @@ RUN apt update -qq \
     && apt install --yes --no-install-recommends \
            dh-r gpg-agent xvfb git \
            r-cran-remotes r-cran-data.table r-cran-crayon r-cran-httr \
-           docker.io links
+           docker.io links \
+           apt-transport-https
 
 RUN installGithub.r eddelbuettel/r2u \
     && r -e 'r2u:::.createDefaultConfiguration()'
