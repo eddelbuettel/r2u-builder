@@ -27,7 +27,7 @@ jobs:
     container:
       image: eddelbuettel/gha_r2u_build:${{ inputs.dist }}
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix: ${{ fromJson(inputs.targets) }}
     steps:
       - name: Checkout
