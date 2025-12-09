@@ -85,8 +85,8 @@ jobs:
         with:
           files: /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/*deb
           overwrite_files: false
-          prerelease: true
+          prerelease: false
           tag_name: latest
-          #make_latest: true
+          make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
