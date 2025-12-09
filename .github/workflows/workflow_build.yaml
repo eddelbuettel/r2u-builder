@@ -87,6 +87,6 @@ jobs:
           overwrite_files: false
           prerelease: false
           tag_name: latest
-          make_latest: true
+          #make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
