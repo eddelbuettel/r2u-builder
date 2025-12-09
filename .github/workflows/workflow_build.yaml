@@ -84,7 +84,7 @@ jobs:
         uses: softprops/action-gh-release@v2.5.0
         with:
           files: /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/*deb
-          overwrite_files: false
+          overwrite_files: true
           prerelease: false
           tag_name: latest
           #make_latest: true
