@@ -72,7 +72,7 @@ jobs:
         with:
           files: /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/*deb
           make_latest: true
-          prerelease: true
+          prerelease: false
           tag_name: latest
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
@@ -81,12 +81,11 @@ jobs:
         # we have about one in 10 or 20 uploads fail and a simple (manual)
         # rerun helps; adding this second trial may alleviate a few of these
         #uses: softprops/action-gh-release@v2.2.2  # 2025-06-10: v2 is currently broken
-        uses: softprops/action-gh-release@v2.5.0
+        uses: softprops/action-gh-release@v2 
         with:
           files: /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/*deb
-          overwrite_files: true
+          make_latest: true
           prerelease: false
           tag_name: latest
-          #make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
