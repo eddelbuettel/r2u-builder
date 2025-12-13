@@ -73,7 +73,7 @@ jobs:
           files: /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/*deb
           make_latest: true
           prerelease: false
-          #tag_name: latest
+          tag_name: latest
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
       - name: Release (Take 2)
@@ -86,6 +86,6 @@ jobs:
           files: /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/*deb
           make_latest: true
           prerelease: false
-          #tag_name: latest
+          tag_name: latest
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
