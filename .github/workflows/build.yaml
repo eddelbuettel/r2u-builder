@@ -52,7 +52,7 @@ jobs:
           r -e 'r2u:::.allBuilds("jammy")'
           r -e 'r2u:::.allBuilds("noble")'
       - name: Upload Config
-        uses: actions/upload-artifact@v4.4.0
+        uses: actions/upload-artifact@v6
         with:
           name: r2u_config
           path: ~/.local/share/R/r2u

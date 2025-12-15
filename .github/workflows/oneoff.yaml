@@ -45,7 +45,7 @@ jobs:
           r -e 'r2u:::.loadDB()'
           r -e 'r2u:::.loadAP()'
       - name: Upload Config
-        uses: actions/upload-artifact@v4.4.0
+        uses: actions/upload-artifact@v6
         with:
           name: r2u_config
           path: ~/.local/share/R/r2u
@@ -103,7 +103,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Get Config
-        uses: actions/download-artifact@v4.1.8
+        uses: actions/download-artifact@v7
         with:
           name: r2u_config
           path: ~/.local/share/R/r2u
@@ -121,7 +121,7 @@ jobs:
       - name: Check
         run:  test -f /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/*.deb
       - name: Upload Deb
-        uses: actions/upload-artifact@v4.4.0
+        uses: actions/upload-artifact@v6
         with:
           name: deb-${{ matrix.target }}
           path: /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/
