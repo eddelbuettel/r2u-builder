@@ -16,13 +16,18 @@ on:
         options:
           - p3m
           - cran
-      targets:
-        description: 'JSON all: {"target":["a","b","c"]}'
+      jammy:
+        description: 'jammy all: {"target":["a","b","c"]}'
         required: true
         default: '{"target":["digest","tint"]}'
         type: string
-      arm_targets:
-        description: 'JSON arm: {"target":["a","c"]}'
+      noble:
+        description: 'noble all: {"target":["a","b","c"]}'
+        required: true
+        default: '{"target":["digest","tint"]}'
+        type: string
+      noble_arm:
+        description: 'noble arm: {"target":["a","c"]}'
         required: true
         default: '{"target":[""]}'
         type: string
@@ -57,13 +62,14 @@ jobs:
           name: r2u_config
           path: ~/.local/share/R/r2u
     
-  build:
+  build_jammy:
     needs: setup
+    if: ${{ inputs.jammy != '{"target":[""]}' }}
     strategy:
       fail-fast: false
       matrix:
         include:
-          - { name: noble,  rel: 24.04             }
+          #- { name: noble,  rel: 24.04             }
           - { name: jammy,  rel: 22.04             }
     uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
     with:
@@ -71,9 +77,24 @@ jobs:
       targets: ${{ inputs.targets }}
     secrets: inherit
     
-  build_arm:
+  build_noble:
     needs: setup
-    if: ${{ inputs.arm_targets != '{"target":[""]}' }}
+    if: ${{ inputs.noble != '{"target":[""]}' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: noble,  rel: 24.04             }
+          #- { name: jammy,  rel: 22.04             }
+    uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
+    with:
+      dist: ${{ matrix.name }}
+      targets: ${{ inputs.targets }}
+    secrets: inherit
+    
+  build_noble_arm:
+    needs: setup
+    if: ${{ inputs.noble_arm != '{"target":[""]}' }}
     strategy:
       fail-fast: false
       matrix:
