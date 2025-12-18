@@ -65,7 +65,7 @@ jobs:
   build_jammy:
     needs: setup
     if: ${{ inputs.jammy != '{"target":[""]}' }}
-    name: "build (jammy)"
+    name: "jammy"
     uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
     with:
       dist: "jammy"
@@ -75,7 +75,7 @@ jobs:
   build_noble:
     needs: setup
     if: ${{ inputs.noble != '{"target":[""]}' }}
-    name: "build (noble)"
+    name: "noble"
     uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
     with:
       dist: "noble"
@@ -85,7 +85,7 @@ jobs:
   build_noble_arm:
     needs: setup
     if: ${{ inputs.noble_arm != '{"target":[""]}' }}
-    name: "build (noble, arm)"
+    name: "noble (arm64)"
     uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
     with:
       dist: "noble"
