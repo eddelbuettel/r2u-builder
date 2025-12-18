@@ -74,7 +74,7 @@ jobs:
     uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
     with:
       dist: ${{ matrix.name }}
-      targets: ${{ inputs.targets }}
+      targets: ${{ inputs.jammy }}
     secrets: inherit
     
   build_noble:
@@ -89,7 +89,7 @@ jobs:
     uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
     with:
       dist: ${{ matrix.name }}
-      targets: ${{ inputs.targets }}
+      targets: ${{ inputs.noble }}
     secrets: inherit
     
   build_noble_arm:
@@ -104,7 +104,7 @@ jobs:
     with:
       dist: ${{ matrix.name }}
       arch: "-arm"
-      targets: ${{ inputs.arm_targets }}
+      targets: ${{ inputs.noble_arm }}
     secrets: inherit
           
           
