@@ -25,7 +25,7 @@ on:
         default: '-v -d -c -f'
         type: string
       arch:
-        description: 'Build arch (ie "ubuntu-24.04-arm64")'
+        description: 'Build arch (ie "ubuntu-24.04-arm")'
         required: false
         default: 'ubuntu-latest'
         type: string
