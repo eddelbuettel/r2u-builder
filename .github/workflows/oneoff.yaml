@@ -24,10 +24,15 @@ on:
         required: false
         default: '-v -d -c -f'
         type: string
+      arch:
+        description: 'Optional "-arm" suffix'
+        required: false
+        default: ''
+        type: string
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest${{ inputs.arch }}
     if: github.repository == 'eddelbuettel/r2u-builder'
     container:
       image: eddelbuettel/gha_r2u_build:${{ inputs.dist }}
