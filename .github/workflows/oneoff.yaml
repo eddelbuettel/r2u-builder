@@ -23,7 +23,7 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
-    if: github.repository == 'eddelbuettel/r2u-bioc-builder'
+    if: github.repository == 'eddelbuettel/r2u-builder'
     container:
       image: eddelbuettel/gha_r2u_build:${{ inputs.dist }}
     steps:
@@ -61,7 +61,7 @@ jobs:
   make_matrix:
     needs: setup
     runs-on: ubuntu-latest
-    if: github.repository == 'eddelbuettel/r2u-bioc-builder'
+    if: github.repository == 'eddelbuettel/r2u-builder'
     outputs:
       runmatrix: ${{ steps.makematrixstep.outputs.matrixoutput }}
     steps:
@@ -87,13 +87,13 @@ jobs:
           #TARGETS=$(echo '[ "SingleCellExperiment" ]')
           #TARGETS=$(echo '["BSgenome.Hsapiens.UCSC.hg19","BSgenome.Mmusculus.UCSC.mm10","BSgenome.Mmusculus.UCSC.mm9"]')
           #TARGETS=$(echo '["IlluminaHumanMethylation450kanno.ilmn12.hg19"]')
-          TARGETS=$(echo '[ "rnaturalearth" ]')
+          TARGETS=$(echo '[ "arrow" ]')
           echo "matrixoutput=$(jq -cn --argjson environments "$TARGETS" '{target: $environments}')" >> $GITHUB_OUTPUT        
           
   package:
     needs: make_matrix
     runs-on: ubuntu-latest
-    if: github.repository == 'eddelbuettel/r2u-bioc-builder'
+    if: github.repository == 'eddelbuettel/r2u-builder'
     container:
       image: eddelbuettel/gha_r2u_build:${{ inputs.dist }}
     strategy:
