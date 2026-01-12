@@ -19,6 +19,11 @@ on:
         required: false
         default: 'noble'
         type: string
+      flags:
+        description: 'The builder flags to use (ie "-s .2")'
+        required: false
+        default: '-v -d -c -f'
+        type: string
 
 jobs:
   setup:
@@ -116,8 +121,9 @@ jobs:
         run: |
           cp -vax r2u-config/depends.dcf r2u-config/depends.${{ inputs.dist }}.dcf r2u-config/blacklist.txt ~/.local/share/R/r2u
       - name: Build
-        run:  r2u.r -v -d -c -f -s .2 -r ${{ inputs.dist }} package ${{ matrix.target }}
+        #run:  r2u.r -v -d -c -f -s .2 -r ${{ inputs.dist }} package ${{ matrix.target }}
         #run:  r2u.r -v -d -c -f       -r ${{ inputs.dist }} package ${{ matrix.target }}
+        run:  r2u.r ${{ inputs.flags }} -r ${{ inputs.dist }} package ${{ matrix.target }}
       - name: Check
         run:  test -f /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/*.deb
       - name: Upload Deb
