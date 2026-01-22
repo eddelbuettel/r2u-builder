@@ -14,6 +14,11 @@ on:
   ##release:
   workflow_dispatch:
     inputs:
+      package:
+        description: 'The package name'
+        required: false
+        default: 'rgTest'
+        type: string
       dist:
         description: 'The Ubuntu distribution to use'
         required: false
@@ -97,7 +102,8 @@ jobs:
           #TARGETS=$(echo '[ "SingleCellExperiment" ]')
           #TARGETS=$(echo '["BSgenome.Hsapiens.UCSC.hg19","BSgenome.Mmusculus.UCSC.mm10","BSgenome.Mmusculus.UCSC.mm9"]')
           #TARGETS=$(echo '["IlluminaHumanMethylation450kanno.ilmn12.hg19"]')
-          TARGETS=$(echo '[ "arrow" ]')
+          #TARGETS=$(echo '[ "arrow" ]')
+          TARGETS=$(echo '[ "${{ inputs.package }}" ]')
           echo "matrixoutput=$(jq -cn --argjson environments "$TARGETS" '{target: $environments}')" >> $GITHUB_OUTPUT        
           
   package:
