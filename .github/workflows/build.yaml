@@ -39,12 +39,12 @@ jobs:
       image: eddelbuettel/gha_r2u_build:noble
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Create Default Config and Cache
         run: |
           r -e 'r2u:::.createDefaultConfiguration()'
       - name: Fetch Updated Config
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: eddelbuettel/r2u-config
           path: r2u-config
