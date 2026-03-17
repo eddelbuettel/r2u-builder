@@ -104,7 +104,7 @@ jobs:
           #TARGETS=$(echo '["IlluminaHumanMethylation450kanno.ilmn12.hg19"]')
           #TARGETS=$(echo '[ "arrow" ]')
           TARGETS=$(echo '[ "${{ inputs.package }}" ]')
-          echo "matrixoutput=$(jq -cn --argjson environments "$TARGETS" '{target: $environments}')" >> $GITHUB_OUTPUT        
+          echo "matrixoutput=$(jq -cn --argjson environments "$TARGETS" '{target: $environments}')" >> ${GITHUB_OUTPUT}
           
   package:
     needs: make_matrix

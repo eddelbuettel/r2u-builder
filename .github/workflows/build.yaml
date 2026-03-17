@@ -19,7 +19,7 @@ on:
       jammy:
         description: 'jammy all: {"target":["a","b","c"]}'
         required: true
-        default: '{"target":["digest","tint"]}'
+        default: '{"target":[""]}'
         type: string
       noble:
         description: 'noble all: {"target":["a","b","c"]}'
@@ -28,6 +28,16 @@ on:
         type: string
       noble_arm:
         description: 'noble arm: {"target":["a","c"]}'
+        required: true
+        default: '{"target":[""]}'
+        type: string
+      resolute:
+        description: 'resolute all: {"target":["a","b","c"]}'
+        required: true
+        default: '{"target":[""]}'
+        type: string
+      resolute_arm:
+        description: 'resolute arm: {"target":["a","c"]}'
         required: true
         default: '{"target":[""]}'
         type: string
@@ -56,6 +66,7 @@ jobs:
           r -e 'r2u:::.loadAP(repo="${{ inputs.repo }}")'
           r -e 'r2u:::.allBuilds("jammy")'
           r -e 'r2u:::.allBuilds("noble")'
+          r -e 'r2u:::.allBuilds("resolute")'
       - name: Upload Config
         uses: actions/upload-artifact@v6
         with:
@@ -92,5 +103,26 @@ jobs:
       arch: "-arm"
       targets: ${{ inputs.noble_arm }}
     secrets: inherit
-          
+
+  build_resolute:
+    needs: setup
+    if: ${{ inputs.resolute != '{"target":[""]}' }}
+    name: "resolute"
+    uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
+    with:
+      dist: "resolute"
+      targets: ${{ inputs.resolute }}
+    secrets: inherit
+    
+  build_resolute_arm:
+    needs: setup
+    if: ${{ inputs.resolute_arm != '{"target":[""]}' }}
+    name: "resolute (arm64)"
+    uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
+    with:
+      dist: "resolute"
+      arch: "-arm"
+      targets: ${{ inputs.resolute_arm }}
+    secrets: inherit
+    
           
