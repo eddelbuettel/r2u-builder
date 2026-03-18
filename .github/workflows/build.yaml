@@ -24,7 +24,7 @@ on:
       noble:
         description: 'noble all: {"target":["a","b","c"]}'
         required: true
-        default: '{"target":["digest","tint"]}'
+        default: '{"target":[""]}'
         type: string
       noble_arm:
         description: 'noble arm: {"target":["a","c"]}'
