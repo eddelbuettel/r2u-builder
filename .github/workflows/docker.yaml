@@ -4,6 +4,7 @@ name: docker
 
 env:
   GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
+  GITHUB_PAT: ${{ secrets.PAT_GITHUB }}
 
 on:
   #push:
