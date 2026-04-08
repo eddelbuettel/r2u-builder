@@ -84,7 +84,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
       - name: Release (Take 2)
-        if: job.steps.release.status == failure()
+        if: jobs.steps.release.status == failure()
         # we have about one in 10 or 20 uploads fail and a simple (manual)
         # rerun helps; adding this second trial may alleviate a few of these
         #uses: softprops/action-gh-release@v2.2.2  # 2025-06-10: v2 is currently broken
