@@ -63,12 +63,13 @@ jobs:
       - name: Show package name
         run: echo "Matrix arg is ${{ matrix.target }}"
       - name: Build
+        id: build
+        continue-on-error: true
         run:  r2u.r -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
-      #- name: Build Take 2
-      #  run:  test -f /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist}}/main/*.deb || r2u.r -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
-      #- name: Build Fallback
-      #  if: failure()
-      #  run:  sleep 15 && r2u.r -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
+      - name: Build (Take 2)
+        # build fails about 3 or 4 per cent of the time so conditionally rebuilding here
+        if: steps.build.outcome == 'failure'
+        run:  r2u.r -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
       - name: Check
         run:  test -f /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist}}/main/*.deb
       - name: Release
@@ -85,7 +86,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
       - name: Release (Take 2)
         if: steps.release.outcome == 'failure'
-        # we have about one in 10 or 20 uploads fail and a simple (manual)
+        # we have about one in 10 or 20 uploads fail and a simple (conditional)
         # rerun helps; adding this second trial may alleviate a few of these
         #uses: softprops/action-gh-release@v2.2.2  # 2025-06-10: v2 is currently broken
         uses: softprops/action-gh-release@v2.4.2
