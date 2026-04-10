@@ -63,15 +63,18 @@ jobs:
       - name: Show package name
         run: echo "Matrix arg is ${{ matrix.target }}"
       - name: Build
-        id: build
-        continue-on-error: true
-        run:  r2u.r -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
-      - name: Build (Take 2)
-        # build fails about 3 or 4 per cent of the time so conditionally rebuilding here
-        if: steps.build.outcome == 'failure'
         run:  r2u.r -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
       - name: Check
+        id: check
+        continue-on-error: true
         run:  test -f /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist}}/main/*.deb
+      - name: Build (Take 2)
+        # build fails about 3 or 4 per cent of the time so conditionally
+        # rebuilding here -- but build can fail in different commands with
+        # different error exits that are not consistently caught (only
+        # 'exit 1 is, apparently) so triggering in 'check' instead of 'build'
+        if: steps.check.outcome == 'failure'
+        run:  r2u.r -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
       - name: Release
         if: success()
         id: release
