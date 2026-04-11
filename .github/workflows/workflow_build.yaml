@@ -64,7 +64,7 @@ jobs:
         run: echo "Matrix arg is ${{ matrix.target }}"
       - name: Build
         run:  r2u.r -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
-      - name: Check
+      - name: Check Once
         id: check
         continue-on-error: true
         run:  test -f /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist}}/main/*.deb
@@ -75,6 +75,8 @@ jobs:
         # 'exit 1 is, apparently) so triggering in 'check' instead of 'build'
         if: steps.check.outcome == 'failure'
         run:  r2u.r -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
+      - name: Check Again
+        run:  test -f /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist}}/main/*.deb
       - name: Release
         if: success()
         id: release
