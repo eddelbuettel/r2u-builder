@@ -74,7 +74,9 @@ jobs:
         # different error exits that are not consistently caught (only
         # 'exit 1 is, apparently) so triggering in 'check' instead of 'build'
         if: steps.check.outcome == 'failure'
-        run:  r2u.r -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
+        run:  |
+          sleep 30
+          r2u.r -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
       - name: Check Again
         run:  test -f /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist}}/main/*.deb
       - name: Release
