@@ -16,6 +16,11 @@ on:
         options:
           - p3m
           - cran
+      flags:
+        description: 'Extra builder flags such "-s .2"'
+        required: false
+        default: ''
+        type: string
       jammy:
         description: 'jammy all: {"target":["a","b","c"]}'
         required: true
@@ -81,6 +86,7 @@ jobs:
     with:
       dist: "jammy"
       targets: ${{ inputs.jammy }}
+      flags: ${{ inputs.flags }}
     secrets: inherit
     
   build_noble:
@@ -91,6 +97,7 @@ jobs:
     with:
       dist: "noble"
       targets: ${{ inputs.noble }}
+      flags: ${{ inputs.flags }}
     secrets: inherit
     
   build_noble_arm:
@@ -102,6 +109,7 @@ jobs:
       dist: "noble"
       arch: "-arm"
       targets: ${{ inputs.noble_arm }}
+      flags: ${{ inputs.flags }}
     secrets: inherit
 
   build_resolute:
@@ -112,6 +120,7 @@ jobs:
     with:
       dist: "resolute"
       targets: ${{ inputs.resolute }}
+      flags: ${{ inputs.flags }}
     secrets: inherit
     
   build_resolute_arm:
@@ -123,6 +132,7 @@ jobs:
       dist: "resolute"
       arch: "-arm"
       targets: ${{ inputs.resolute_arm }}
+      flags: ${{ inputs.flags }}
     secrets: inherit
     
           

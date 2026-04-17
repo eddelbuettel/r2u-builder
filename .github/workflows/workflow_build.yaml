@@ -23,6 +23,12 @@ on:
         required: true
         default: ''
         type: string
+      flags:
+        description: 'Extra builder flags such "-s .2"'
+        required: false
+        default: ''
+        type: string
+        
         
 jobs:
   build:
@@ -63,7 +69,7 @@ jobs:
       - name: Show package name
         run: echo "Matrix arg is ${{ matrix.target }}"
       - name: Build
-        run:  r2u.r -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
+        run:  r2u.r ${{ inputs.flags }} -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
       - name: Check Once
         id: check
         continue-on-error: true
@@ -76,7 +82,7 @@ jobs:
         if: steps.check.outcome == 'failure'
         run:  |
           sleep 30
-          r2u.r -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
+          r2u.r ${{ inputs.flags }} -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
       - name: Check Again
         run:  test -f /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist}}/main/*.deb
       - name: Release
