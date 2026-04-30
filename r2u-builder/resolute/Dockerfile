@@ -24,6 +24,9 @@ RUN apt update -qq \
            docker.io links \
    && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
 
+## Needed in transition
+RUN Rscript -e 'bspm::disable(); install.packages("data.table", type="source")'
+
 RUN installGithub.r eddelbuettel/r2u \
     && r -e 'r2u:::.createDefaultConfiguration()'
 
