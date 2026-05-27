@@ -22,7 +22,8 @@ RUN apt update -qq \
            dh-r gpg-agent xvfb git curl \
            r-cran-remotes r-cran-data.table r-cran-crayon r-cran-httr \
            docker.io links \
-   && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+    && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y \
+    && rm -rf /usr/local/lib/R/site-library/data.table
 
 RUN installGithub.r eddelbuettel/r2u \
     && r -e 'r2u:::.createDefaultConfiguration()'
