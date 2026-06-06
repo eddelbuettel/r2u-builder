@@ -89,25 +89,26 @@ jobs:
         if: success()
         id: release
         continue-on-error: true
-        uses: softprops/action-gh-release@v2.4.2
+        #uses: softprops/action-gh-release@v2.2.2  # 2025-06-10: v2 is currently broken
+        #      2.4.2 works reliably but trigger 'node24' warnings
+        uses: softprops/action-gh-release@v3
         with:
           files: /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/*deb
           make_latest: true
           prerelease: false
           tag_name: latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
+          token: ${{ secrets.PAT_GITHUB }}
       - name: Release (Take 2)
         if: steps.release.outcome == 'failure'
         # we have about one in 10 or 20 uploads fail and a simple (conditional)
         # rerun helps; adding this second trial may alleviate a few of these
         #uses: softprops/action-gh-release@v2.2.2  # 2025-06-10: v2 is currently broken
-        uses: softprops/action-gh-release@v2.4.2
+        #      2.4.2 works reliably but trigger 'node24' warnings
+        uses: softprops/action-gh-release@v3
         with:
           files: /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/*deb
           make_latest: true
           prerelease: false
           tag_name: latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
+          token: ${{ secrets.PAT_GITHUB }}
       
