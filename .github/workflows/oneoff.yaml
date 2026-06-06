@@ -143,7 +143,7 @@ jobs:
           name: deb-${{ matrix.target }}
           path: /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/
       - name: Release
-        uses: softprops/action-gh-release@v2.4.2
+        uses: softprops/action-gh-release@v3.0.0
         with:
           files: /var/local/r2u/ubuntu/pool/dists/${{ inputs.dist }}/main/*deb
           make_latest: true
