@@ -43,12 +43,12 @@ jobs:
       image: eddelbuettel/gha_r2u_build:${{ inputs.dist }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Create Default Config and Cache
         run: |
           r -e 'r2u:::.createDefaultConfiguration()'
       - name: Fetch Updated Config
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: eddelbuettel/r2u-config
           path: r2u-config
@@ -117,14 +117,14 @@ jobs:
       matrix: ${{ fromJson(needs.make_matrix.outputs.runmatrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Get Config
         uses: actions/download-artifact@v7
         with:
           name: r2u_config
           path: ~/.local/share/R/r2u
       - name: Fetch Updated Config
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: eddelbuettel/r2u-config
           path: r2u-config
@@ -149,6 +149,7 @@ jobs:
           make_latest: true
           prerelease: true
           tag_name: latest
+          token: ${{ secrets.PAT_GITHUB }}
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
           
