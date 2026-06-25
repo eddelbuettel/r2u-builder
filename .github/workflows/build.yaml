@@ -54,12 +54,12 @@ jobs:
       image: eddelbuettel/gha_r2u_build:noble
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Create Default Config and Cache
         run: |
           r -e 'r2u:::.createDefaultConfiguration()'
       - name: Fetch Updated Config
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: eddelbuettel/r2u-config
           path: r2u-config
@@ -73,7 +73,7 @@ jobs:
           r -e 'r2u:::.allBuilds("noble")'
           r -e 'r2u:::.allBuilds("resolute")'
       - name: Upload Config
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: r2u_config
           path: ~/.local/share/R/r2u
