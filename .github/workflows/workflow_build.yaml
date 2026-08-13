@@ -68,6 +68,12 @@ jobs:
       #   run: Rscript -e 'r2u:::.loadAP(repo="cran", force=TRUE)'
       - name: Show package name
         run: echo "Matrix arg is ${{ matrix.target }}"
+      - name: Show hostname -I
+        run: hostname -I
+      - name: Show external address
+        run: curl -s ipinfo.io/ip
+      - name: Show full ip address
+        run: ip addr
       - name: Build
         run:  r2u.r ${{ inputs.flags }} -x -v -d -c -f -r ${{ inputs.dist }} package ${{ matrix.target }}
       - name: Check Once
