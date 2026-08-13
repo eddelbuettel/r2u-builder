@@ -16,13 +16,18 @@ ENV PATH="/opt/cargo/bin:${PATH}"
 ## Packages needed for r2u,
 ## and for docker which r2u checks for even though we do not use it here
 ## and for libapt-pkg-dev as we need to force a reinstallation of RcppAPT
+COPY rapt.sources /etc/apt/sources.list.d/
 RUN apt update -qq \
     && apt upgrade --yes \
     && apt install --yes --no-install-recommends \
+           rapt \
            dh-r gpg-agent xvfb git curl \
            r-cran-remotes r-cran-data.table r-cran-crayon r-cran-httr \
            docker.io links \
-   && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+    && apt remove --yes python3-dbus python3-gi python3-apt \
+    && apt autoremove --yes \
+    && sed -ie '/bspm/d' /etc/R/Rprofile.site \
+    && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
 
 ## Needed in transition
 #RUN Rscript -e 'bspm::disable(); install.packages("data.table", type="source")'

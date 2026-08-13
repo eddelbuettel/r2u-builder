@@ -1,0 +1,7 @@
+Types: deb
+URIs: http://cornball-ai.github.io/rapt
+Suites: resolute
+Components: main
+Trusted: yes
+Enabled: yes
+Architectures: amd64 arm64
