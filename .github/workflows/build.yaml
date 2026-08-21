@@ -82,7 +82,7 @@ jobs:
     needs: setup
     if: ${{ inputs.jammy != '{"target":[""]}' }}
     name: "jammy"
-    uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
+    uses: r2du/r2u-builder/.github/workflows/workflow_build.yaml@main
     with:
       dist: "jammy"
       targets: ${{ inputs.jammy }}
@@ -93,7 +93,7 @@ jobs:
     needs: setup
     if: ${{ inputs.noble != '{"target":[""]}' }}
     name: "noble"
-    uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
+    uses: r2du/r2u-builder/.github/workflows/workflow_build.yaml@main
     with:
       dist: "noble"
       targets: ${{ inputs.noble }}
@@ -104,7 +104,7 @@ jobs:
     needs: setup
     if: ${{ inputs.noble_arm != '{"target":[""]}' }}
     name: "noble (arm64)"
-    uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
+    uses: r2du/r2u-builder/.github/workflows/workflow_build.yaml@main
     with:
       dist: "noble"
       arch: "-arm"
@@ -116,7 +116,7 @@ jobs:
     needs: setup
     if: ${{ inputs.resolute != '{"target":[""]}' }}
     name: "resolute"
-    uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
+    uses: r2du/r2u-builder/.github/workflows/workflow_build.yaml@main
     with:
       dist: "resolute"
       targets: ${{ inputs.resolute }}
@@ -127,7 +127,7 @@ jobs:
     needs: setup
     if: ${{ inputs.resolute_arm != '{"target":[""]}' }}
     name: "resolute (arm64)"
-    uses: eddelbuettel/r2u-builder/.github/workflows/workflow_build.yaml@main
+    uses: r2du/r2u-builder/.github/workflows/workflow_build.yaml@main
     with:
       dist: "resolute"
       arch: "-arm"
