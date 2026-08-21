@@ -38,7 +38,7 @@ on:
 jobs:
   setup:
     runs-on: ${{ inputs.arch }}
-    if: github.repository == 'eddelbuettel/r2u-builder'
+    if: github.repository == 'r2du/r2u-builder'
     container:
       image: eddelbuettel/gha_r2u_build:${{ inputs.dist }}
     steps:
@@ -76,7 +76,7 @@ jobs:
   make_matrix:
     needs: setup
     runs-on: ${{ inputs.arch }}
-    if: github.repository == 'eddelbuettel/r2u-builder'
+    if: github.repository == 'r2du/r2u-builder'
     outputs:
       runmatrix: ${{ steps.makematrixstep.outputs.matrixoutput }}
     steps:
@@ -109,7 +109,7 @@ jobs:
   package:
     needs: make_matrix
     runs-on: ${{ inputs.arch }}
-    if: github.repository == 'eddelbuettel/r2u-builder'
+    if: github.repository == 'r2du/r2u-builder'
     container:
       image: eddelbuettel/gha_r2u_build:${{ inputs.dist }}
     strategy:

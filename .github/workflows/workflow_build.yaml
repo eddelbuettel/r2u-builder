@@ -32,7 +32,8 @@ on:
         
 jobs:
   build:
-    runs-on: ubuntu-24.04${{ inputs.arch }}
+    #runs-on: ubuntu-24.04${{ inputs.arch }}
+    runs-on: blacksmith-4vcpu-ubuntu-2404${{ inputs.arch }}
     container:
       image: eddelbuettel/gha_r2u_build:${{ inputs.dist }}
     strategy:
