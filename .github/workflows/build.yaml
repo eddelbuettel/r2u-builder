@@ -49,7 +49,7 @@ on:
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     container:
       image: eddelbuettel/gha_r2u_build:noble
     steps:
