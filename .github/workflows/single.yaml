@@ -13,7 +13,7 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-24.04-arm
-    if: github.repository == 'r2du/r2u-builder'
+    if: github.repository == 'eddelbuettel/r2u-builder'
     container:
       image: eddelbuettel/gha_r2u_build:noble
     steps:
