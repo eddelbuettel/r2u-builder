@@ -55,6 +55,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+      - name: Connectivity
+        run: |
+          extip=$(curl -s ipinfo.io/ip)
+          echo "Running via external IP address ${extip}"
+          curl -I -f -s -o /dev/null https://r2u.stat.illinois.edu
       - name: Create Default Config and Cache
         run: |
           r -e 'r2u:::.createDefaultConfiguration()'

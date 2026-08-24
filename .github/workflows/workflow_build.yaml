@@ -41,6 +41,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+      - name: Connectivity
+        run: |
+          extip=$(curl -s ipinfo.io/ip)
+          echo "Running via external IP address ${extip}"
+          curl -I -f -s -o /dev/null https://r2u.stat.illinois.edu
       - name: Get Config
         uses: actions/download-artifact@v7
         with:
@@ -70,8 +75,8 @@ jobs:
         run: echo "Matrix arg is ${{ matrix.target }}"
       #- name: Show hostname -I
       #  run: hostname -I
-      - name: Show external address
-        run: curl -s ipinfo.io/ip
+      #- name: Show external address
+      #  run: curl -s ipinfo.io/ip
       #- name: Show full ip address
       #  run: ip addr
       - name: Build
