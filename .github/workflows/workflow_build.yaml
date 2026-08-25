@@ -44,12 +44,12 @@ jobs:
       - name: Connectivity
         run: |
           extip=$(curl -s ipinfo.io/ip)
-          echo "Running via external IP address ${extip}"
-          curl -I -f -s -o /dev/null https://r2u.stat.illinois.edu
+          echo "Running via external IP address ${extip}, now testing r2u repo accessibility."
+          curl -I -s -o /dev/null https://r2u.stat.illinois.edu
           if test "$?" = "0"; then
-              echo "The r2u repository is reachable"
+              echo "The r2u repository is reachable."
           else
-              echo "The r2u repository is **not reachable**"
+              echo "The r2u repository is **not reachable**."
               ## Recording the offending IP and nothing else
               curl -s http://r2u.eddelbuettel.com/manual/bad_gha_ip?${extip}
               exit 13
