@@ -45,11 +45,11 @@ jobs:
         run: |
           extip=$(curl -s ipinfo.io/ip)
           echo "Running via external IP address ${extip}, now testing primary r2u repo accessibility."
-          webstatus=$(curl --head --silent --output /dev/null --write-out "%{http_code}" https://r2u.stat.illinois.edu)
+          webstatus=$(curl --head --silent --no-fail --output /dev/null --write-out "%{http_code}" https://r2u.stat.illinois.edu || true)
           if test "${webstatus}" = "200"; then
               echo "The r2u repository is reachable."
           else
-              echo "The primary r2u repository is **not reachable**, status is ${webstatus})"
+              echo "The primary r2u repository is **not reachable**."
               ## Recording the offending IP and nothing else
               curl -s http://r2u.eddelbuettel.com/manual/bad_gha_ip?${extip}
               exit 13
