@@ -49,7 +49,7 @@ jobs:
           if test "${webstatus}" = "200"; then
               echo "The r2u repository is reachable."
           else
-              echo "The primary r2u repository is **not reachable**."
+              echo "::error::The primary r2u repository is **not reachable** from ${extip}."
               ## Recording the offending IP and nothing else
               curl -s http://r2u.eddelbuettel.com/manual/bad_gha_ip?${extip}
               exit 13
