@@ -15,7 +15,6 @@ ENV PATH="/opt/cargo/bin:${PATH}"
 
 ## Packages needed for r2u,
 ## and for docker which r2u checks for even though we do not use it here
-## and for libapt-pkg-dev as we need to force a reinstallation of RcppAPT
 COPY rapt.sources /etc/apt/sources.list.d/
 RUN apt update -qq \
     && apt upgrade --yes \
