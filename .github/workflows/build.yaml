@@ -59,7 +59,8 @@ jobs:
         run: |
           extip=$(curl -s ipinfo.io/ip)
           echo "Running via external IP address ${extip}"
-          curl -I -f -s -o /dev/null https://r2u.stat.illinois.edu
+          webstatus=$(curl --head --silent --no-fail --output /dev/null --write-out "%{http_code}" https://r2u.stat.illinois.edu || true)
+          echo "Primary repo access status is ${webstatus}"
       - name: Create Default Config and Cache
         run: |
           r -e 'r2u:::.createDefaultConfiguration()'
