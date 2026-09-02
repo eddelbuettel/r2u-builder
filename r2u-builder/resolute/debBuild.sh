@@ -54,7 +54,7 @@ if [ "${aptpkgs}" != "" ]; then
     webstatus=$(curl --head --silent --no-fail --output /dev/null --write-out "%{http_code}" https://r2u.stat.illinois.edu || true)
     if test "${webstatus}" != "200"; then
         echo "::notice::The primary r2u repository is *not reachable*. Switching to secondary URL."
-        sed -ie 's|https://r2u.stat.illinois.edu/ubuntu|http://r2u.eddelbuettel.com|' /etc/apt/sources.list.d/r2u.sources
+        sed -ie 's|http://r2u.stat.illinois.edu/ubuntu|http://r2u.eddelbuettel.com|' /etc/apt/sources.list.d/r2u.sources
     fi
     apt update -qq
     apt install --yes --no-install-recommends ${aptpkgs}
