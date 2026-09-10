@@ -51,7 +51,7 @@ jobs:
           else
               ## Recording the offending IP but carry on (as the build step checks too)
               curl -s http://r2u.eddelbuettel.com/manual/bad_gha_ip?${extip}
-              echo "::notice::The primary r2u repository is **not reachable** from ${extip}."
+              echo "::notice::The primary r2u repository is not reachable from ${extip}."
           fi
       - name: Get Config
         uses: actions/download-artifact@v7
